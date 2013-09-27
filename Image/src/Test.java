@@ -1,10 +1,22 @@
 import java.awt.EventQueue;
 
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import java.awt.Font;
+
 import javax.swing.JButton;
+import javax.swing.JRadioButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 
 public class Test {
@@ -49,15 +61,44 @@ public class Test {
 		frame.getContentPane().add(lblNewLabel);
 		
 		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				  File fichier = null;
+				JFileChooser fileChooser = new JFileChooser();
+				int returnValue = fileChooser.showOpenDialog(null);
+		        if (returnValue == JFileChooser.APPROVE_OPTION) {
+		          
+		            fichier=fileChooser.getSelectedFile(); //fichier récupéré
+		            try { BufferedImage bufIm= ImageIO.read(fichier);
+		               ImageIO.write(bufIm,"pgm",fichier);
+		 
+		                 
+		                    } catch (IOException e1) {
+		                        e1.printStackTrace();
+		                       
+		                    } }
+			}
+		}
+			);
 		btnNewButton.setBounds(49, 94, 89, 23);
 		frame.getContentPane().add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("New button");
+		JButton btnNewButton_1 = new JButton("charger");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {}
+		}	);
+		
+		
+		
 		btnNewButton_1.setBounds(49, 157, 89, 23);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("New button");
 		btnNewButton_2.setBounds(49, 240, 89, 23);
 		frame.getContentPane().add(btnNewButton_2);
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("New radio button");
+		rdbtnNewRadioButton.setBounds(229, 74, 109, 23);
+		frame.getContentPane().add(rdbtnNewRadioButton);
 	}
 }
